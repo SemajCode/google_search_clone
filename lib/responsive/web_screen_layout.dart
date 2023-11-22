@@ -7,6 +7,8 @@ class WebScreenLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: backgroundColor,
@@ -57,7 +59,15 @@ class WebScreenLayout extends StatelessWidget {
           )
         ],
       ),
-      body: const Center(),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 5,
+          right: 5,
+        ),
+        child: Column(
+          children: [SizedBox(height: size.height)],
+        ),
+      ),
     );
   }
 }
