@@ -4,6 +4,7 @@ import 'package:google_search_clone/colors.dart';
 import 'package:google_search_clone/widget/search.dart';
 import 'package:google_search_clone/widget/translation_buttons.dart';
 import 'package:google_search_clone/widget/web/search_buttons.dart';
+import 'package:google_search_clone/widget/web/web_footer.dart';
 
 class WebScreenLayout extends StatelessWidget {
   const WebScreenLayout({super.key});
@@ -71,20 +72,22 @@ class WebScreenLayout extends StatelessWidget {
           children: [
             SizedBox(height: size.height * 0.25),
             const Expanded(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Search(),
-                    SizedBox(height: 20),
-                    SearchButtons(),
-                    SizedBox(height: 20),
-                    TranslationButtons(),
-                  ],
-                )
-              ],
-            ))
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Search(),
+                      SizedBox(height: 20),
+                      SearchButtons(),
+                      SizedBox(height: 20),
+                      TranslationButtons(),
+                    ],
+                  )
+                ],
+              ),
+            ),
+            const WebFooter(),
           ],
         ),
       ),
