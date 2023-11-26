@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_search_clone/colors.dart';
 import 'package:google_search_clone/widget/footer_text.dart';
 
@@ -38,9 +39,11 @@ class WebFooter extends StatelessWidget {
                 SizedBox(width: 10),
               ],
             ),
+            // Delete
+            Icon(Icons.delete)
           ],
         ),
       ),
     );
   }
-}
+}///
