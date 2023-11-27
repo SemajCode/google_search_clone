@@ -40,7 +40,7 @@ class WebFooter extends StatelessWidget {
               ],
             ),
             // Delete
-            Icon(Icons.delete)
+            Icon(Icons.delete),
           ],
         ),
       ),
