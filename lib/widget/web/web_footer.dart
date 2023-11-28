@@ -39,8 +39,6 @@ class WebFooter extends StatelessWidget {
                 SizedBox(width: 10),
               ],
             ),
-            // Delete
-            Icon(Icons.delete),
           ],
         ),
       ),
