@@ -16,6 +16,12 @@ class MobileFooter extends StatelessWidget {
         SizedBox(width: 10),
         FooterText(title: 'How Search Works'),
         SizedBox(width: 10),
+        FooterText(title: 'Privacy'),
+        SizedBox(width: 10),
+        FooterText(title: 'Terms'),
+        SizedBox(width: 10),
+        FooterText(title: 'Settings'),
+        SizedBox(width: 10),
       ],
     );
   }

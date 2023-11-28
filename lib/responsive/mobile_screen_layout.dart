@@ -27,16 +27,17 @@ class MobileScreenLayout extends StatelessWidget {
         title: SizedBox(
           width: size.width,
           child: const DefaultTabController(
-              length: 2,
-              child: TabBar(
-                labelColor: blueColor,
-                unselectedLabelColor: Colors.grey,
-                indicatorColor: blueColor,
-                tabs: [
-                  Tab(text: 'ALL'),
-                  Tab(text: 'IMAGES'),
-                ],
-              )),
+            length: 2,
+            child: TabBar(
+              labelColor: blueColor,
+              unselectedLabelColor: Colors.grey,
+              indicatorColor: blueColor,
+              tabs: [
+                Tab(text: 'ALL'),
+                Tab(text: 'IMAGES'),
+              ],
+            ),
+          ),
         ),
         actions: [
           const SizedBox(width: 10),
