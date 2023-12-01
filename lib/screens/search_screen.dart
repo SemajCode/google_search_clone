@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_search_clone/colors.dart';
+import 'package:google_search_clone/services/api_service.dart';
 import 'package:google_search_clone/widget/search_footer.dart';
 import 'package:google_search_clone/widget/search_header.dart';
 import 'package:google_search_clone/widget/search_taps.dart';
@@ -28,6 +29,26 @@ class SearchScreen extends StatelessWidget {
             ),
             // search result component
 
+            FutureBuilder(
+              future: ApiService().fetchData(queryTerm: 'queryTerm'),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(
+                          left: 150,
+                          top: 12,
+                        ),
+                        child: Text('About'),
+                      )
+                    ],
+                  );
+                }
+              },
+            ),
             // pagination buttons
             SizedBox(
               width: double.infinity,
