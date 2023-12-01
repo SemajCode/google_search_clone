@@ -3,6 +3,7 @@ import 'package:google_search_clone/colors.dart';
 import 'package:google_search_clone/services/api_service.dart';
 import 'package:google_search_clone/widget/search_footer.dart';
 import 'package:google_search_clone/widget/search_header.dart';
+import 'package:google_search_clone/widget/search_result_component.dart';
 import 'package:google_search_clone/widget/search_taps.dart';
 
 class SearchScreen extends StatelessWidget {
@@ -30,7 +31,7 @@ class SearchScreen extends StatelessWidget {
             // search result component
 
             FutureBuilder(
-              future: ApiService().fetchData(queryTerm: 'queryTerm'),
+              future: ApiService().fetchData(queryTerm: 'Rivaan'),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Column(
@@ -38,15 +39,43 @@ class SearchScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 150,
                           top: 12,
                         ),
-                        child: Text('About'),
+                        child: Text(
+                          'About ${snapshot.data?['searchInformation']['formattedTotalResults']} result (${snapshot.data?['searchInformation']['formattedSearchTime']} seconds)',
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Color(0xff70757a),
+                          ),
+                        ),
+                      ),
+                      ListView.builder(
+                        itemCount: snapshot.data?['items'].length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                              left: 150,
+                              top: 10,
+                            ),
+                            child: SearchResultComponent(
+                              text: snapshot.data?['items'][index]['title'],
+                              linkToGo: snapshot.data?['items'][index]['link'],
+                              desc: snapshot.data?['items'][index]['snippet'],
+                              link: snapshot.data?['items'][index]
+                                  ['formattedUrl'],
+                            ),
+                          );
+                        },
                       )
                     ],
                   );
                 }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
               },
             ),
             // pagination buttons
