@@ -35,7 +35,10 @@ class SearchScreen extends StatelessWidget {
               Padding(
                 padding:
                     EdgeInsets.only(left: size.width <= 768 ? 10.0 : 150.0),
-                child: const SearchTaps(),
+                child: const SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: SearchTaps(),
+                ),
               ),
               const Divider(
                 height: 0,
@@ -52,38 +55,48 @@ class SearchScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: EdgeInsets.only(
-                            left: size.width <= 768 ? 10.0 : 150,
-                            top: 12,
-                          ),
-                          child: Text(
-                            'About ${snapshot.data?['searchInformation']['formattedTotalResults']} result (${snapshot.data?['searchInformation']['formattedSearchTime']} seconds)',
-                            style: const TextStyle(
-                              fontSize: 15,
-                              color: Color(0xff70757a),
-                            ),
-                          ),
-                        ),
-                        ListView.builder(
-                          itemCount: snapshot.data?['items'].length,
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return Padding(
+                        Column(
+                          children: [
+                            Container(
                               padding: EdgeInsets.only(
                                 left: size.width <= 768 ? 10.0 : 150,
-                                top: 10,
+                                top: 12,
                               ),
-                              child: SearchResultComponent(
-                                text: snapshot.data?['items'][index]['title'],
-                                linkToGo: snapshot.data?['items'][index]
-                                    ['link'],
-                                desc: snapshot.data?['items'][index]['snippet'],
-                                link: snapshot.data?['items'][index]
-                                    ['formattedUrl'],
+                              child: Text(
+                                'About ${snapshot.data?['searchInformation']['formattedTotalResults']} result (${snapshot.data?['searchInformation']['formattedSearchTime']} seconds)',
+                                style: const TextStyle(
+                                  fontSize: 15,
+                                  color: Color(0xff70757a),
+                                ),
                               ),
-                            );
-                          },
+                            ),
+                            ListView.builder(
+                              itemCount: snapshot.data?['items'].length,
+                              shrinkWrap: true,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(
+                                        left: size.width <= 768 ? 10.0 : 150,
+                                        top: 10,
+                                      ),
+                                      child: SearchResultComponent(
+                                        text: snapshot.data?['items'][index]
+                                            ['title'],
+                                        linkToGo: snapshot.data?['items'][index]
+                                            ['link'],
+                                        desc: snapshot.data?['items'][index]
+                                            ['snippet'],
+                                        link: snapshot.data?['items'][index]
+                                            ['formattedUrl'],
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
                         ),
                         // pagination buttons
                         SizedBox(
