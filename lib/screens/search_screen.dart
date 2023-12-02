@@ -7,7 +7,14 @@ import 'package:google_search_clone/widget/search_result_component.dart';
 import 'package:google_search_clone/widget/search_taps.dart';
 
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+  const SearchScreen({
+    super.key,
+    required this.searchQuery,
+    required this.start,
+  });
+
+  final String searchQuery;
+  final String start;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,8 @@ class SearchScreen extends StatelessWidget {
             // search result component
 
             FutureBuilder(
-              future: ApiService().fetchData(queryTerm: 'Rivaan'),
+              future:
+                  ApiService().fetchData(queryTerm: searchQuery, start: start),
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
                   return Column(
@@ -69,7 +77,61 @@ class SearchScreen extends StatelessWidget {
                             ),
                           );
                         },
-                      )
+                      ),
+                      // pagination buttons
+                      SizedBox(
+                        width: double.infinity,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                if (start != '0') {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => SearchScreen(
+                                        searchQuery: searchQuery,
+                                        start:
+                                            (int.parse(start) - 10).toString(),
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
+                              child: const Text(
+                                '« Previous ',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: blueColor,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(width: 30),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => SearchScreen(
+                                      searchQuery: searchQuery,
+                                      start: (int.parse(start) + 10).toString(),
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Next »',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: blueColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 30),
+                      const SearchFooter(),
                     ],
                   );
                 }
@@ -78,39 +140,6 @@ class SearchScreen extends StatelessWidget {
                 );
               },
             ),
-            // pagination buttons
-            SizedBox(
-              width: double.infinity,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      '« Previous ',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: blueColor,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 30),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Next »',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: blueColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(width: 30),
-            const SearchFooter(),
           ],
         ),
       ),
