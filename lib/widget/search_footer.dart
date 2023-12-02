@@ -6,14 +6,14 @@ class SearchFooter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Column(
       children: [
         Container(
           color: footerColor,
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 150,
+            padding: EdgeInsets.symmetric(
+              horizontal: size.width <= 768 ? 10.0 : 150,
               vertical: 15,
             ),
             child: Row(

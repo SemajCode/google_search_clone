@@ -18,6 +18,8 @@ class SearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -27,9 +29,9 @@ class SearchScreen extends StatelessWidget {
             // web header
             const SearchHeader(),
             // taps for news images
-            const Padding(
-              padding: EdgeInsets.only(left: 150.0),
-              child: SearchTaps(),
+            Padding(
+              padding: EdgeInsets.only(left: size.width <= 768 ? 10.0 : 150.0),
+              child: const SearchTaps(),
             ),
             const Divider(
               height: 0,
@@ -47,8 +49,8 @@ class SearchScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.only(
-                          left: 150,
+                        padding: EdgeInsets.only(
+                          left: size.width <= 768 ? 10.0 : 150,
                           top: 12,
                         ),
                         child: Text(
@@ -64,8 +66,8 @@ class SearchScreen extends StatelessWidget {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return Padding(
-                            padding: const EdgeInsets.only(
-                              left: 150,
+                            padding: EdgeInsets.only(
+                              left: size.width <= 768 ? 10.0 : 150,
                               top: 10,
                             ),
                             child: SearchResultComponent(
